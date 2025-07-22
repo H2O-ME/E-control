@@ -8,7 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>E-control 命令速查表</h1>
+        <h1>E-control 命令生成器</h1>
+        <div class="device-container">
+            <div class="device-input-group">
+                <label for="deviceName">设备名称:</label>
+                <input type="text" id="deviceName" placeholder="输入设备名称 (如: PC01)" value="设备名">
+                <button id="saveDeviceName">保存</button>
+                <span id="deviceSaved" class="saved-notice">已保存</span>
+            </div>
+        </div>
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="搜索命令...">
         </div>

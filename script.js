@@ -1,4 +1,45 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // 设备名称管理
+    const deviceNameInput = document.getElementById('deviceName');
+    const saveDeviceBtn = document.getElementById('saveDeviceName');
+    const savedNotice = document.getElementById('deviceSaved');
+    let currentDeviceName = localStorage.getItem('econtrol_device_name') || '设备名';
+    
+    // 初始化设备名称
+    deviceNameInput.value = currentDeviceName;
+    
+    // 保存设备名称
+    function saveDeviceName() {
+        const newName = deviceNameInput.value.trim() || '设备名';
+        currentDeviceName = newName;
+        localStorage.setItem('econtrol_device_name', newName);
+        
+        // 显示保存成功的提示
+        savedNotice.classList.add('visible');
+        setTimeout(() => {
+            savedNotice.classList.remove('visible');
+        }, 2000);
+        
+        // 重新渲染命令列表
+        if (window.currentFilteredCommands) {
+            renderCommands(window.currentFilteredCommands);
+        }
+    }
+    
+    // 保存按钮点击事件
+    saveDeviceBtn.addEventListener('click', saveDeviceName);
+    
+    // 按回车键保存
+    deviceNameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            saveDeviceName();
+        }
+    });
+    
+    // 替换命令中的设备名占位符
+    function replaceDeviceName(command) {
+        return command.replace(/设备名/g, currentDeviceName);
+    }
     // E-control 命令数据
     const commands = [
         // 基础命令格式
@@ -52,6 +93,12 @@ document.addEventListener('DOMContentLoaded', function() {
             command: 'to+设备名+screen',
             description: '获取指定设备的屏幕截图'
         },
+        {
+            title: '安全删除程序 (指定设备)',
+            command: 'to+设备名+remove',
+            description: '安全删除程序 - 使用批处理确保程序完全退出后再删除',
+            isBroadcast: false
+        },
         // 广播命令格式
         {
             title: '执行命令 (广播)',
@@ -91,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: '获取文件夹中的文件 (广播)',
-            command: 'file+文件夹名+文件名.扩展名',
+            command: 'file+文件夹名+文件名',
             description: '获取所有设备上文件夹中的文件',
             isBroadcast: true
         },
@@ -111,6 +158,13 @@ document.addEventListener('DOMContentLoaded', function() {
             title: '获取屏幕截图 (广播)',
             command: 'screen',
             description: '获取所有设备的屏幕截图',
+            isBroadcast: true
+        },
+        // 安全删除命令
+        {
+            title: '自毁程序 (广播)',
+            command: 'remove',
+            description: '安全删除程序 - 在所有设备上执行安全删除',
             isBroadcast: true
         }
     ];
@@ -150,6 +204,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     return true;
                 });
                 
+                // 保存当前筛选结果
+                window.currentFilteredCommands = filtered;
                 // 显示筛选后的命令
                 renderCommands(filtered);
             });
@@ -187,13 +243,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${tag}
                     <div class="command-title">${cmd.title}</div>
                     <div class="command-desc">${cmd.description}</div>
-                    <div class="command-code">${cmd.command}</div>
+                    <div class="command-code">${cmd.isBroadcast ? cmd.command : replaceDeviceName(cmd.command)}</div>
                 `;
                 
                 // 添加点击事件
                 card.addEventListener('click', () => {
-                    copyToClipboard(cmd.command);
-                    showNotification(`已复制: ${cmd.command}`);
+                    const processedCommand = cmd.isBroadcast 
+                        ? cmd.command 
+                        : replaceDeviceName(cmd.command);
+                    copyToClipboard(processedCommand);
+                    showNotification(`已复制: ${processedCommand}`);
                 });
                 
                 commandsContainer.appendChild(card);
