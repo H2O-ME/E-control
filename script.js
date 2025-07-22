@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: '访问网站 (指定设备)',
-            command: 'to+设备名+website+example.com',
+            command: 'to+设备名+website+',
             description: '让指定设备访问网站 (不需要https://)'
         },
         {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: '获取桌面文件 (指定设备)',
-            command: 'to+设备名+file+文件名.扩展名',
+            command: 'to+设备名+file+文件名',
             description: '获取指定设备桌面上的文件'
         },
         {
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: '获取文件夹中的文件 (指定设备)',
-            command: 'to+设备名+file+文件夹名+文件名.扩展名',
+            command: 'to+设备名+file+文件夹名+文件名',
             description: '获取指定设备上文件夹中的文件'
         },
         {
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             title: '安全删除程序 (指定设备)',
             command: 'to+设备名+remove',
-            description: '安全删除程序 - 使用批处理确保程序完全退出后再删除',
+            description: '使用批处理执行自毁',
             isBroadcast: false
         },
         // 广播命令格式
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: '访问网站 (广播)',
-            command: 'website+example.com',
+            command: 'website+',
             description: '让所有设备访问网站 (不需要https://)',
             isBroadcast: true
         },
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: '获取桌面文件 (广播)',
-            command: 'file+文件名.扩展名',
+            command: 'file+文件名',
             description: '获取所有设备桌面上的文件',
             isBroadcast: true
         },
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: '获取文件夹中的文件 (广播)',
-            command: 'file+文件夹名+文件名',
+            command: 'file+文件夹名',
             description: '获取所有设备上文件夹中的文件',
             isBroadcast: true
         },
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             title: '自毁程序 (广播)',
             command: 'remove',
-            description: '安全删除程序 - 在所有设备上执行安全删除',
+            description: '在所有设备上执行自毁',
             isBroadcast: true
         }
     ];
