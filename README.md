@@ -1,11 +1,12 @@
+<h2>这是E-control命令速查表网站的源码，E-control项目暂不开源</h2>
 <div align="center">
+  <img width="100" height="100" src="https://img.icons8.com/metro/100/console.png" alt="console"/>
   <h1>E-control 远程控制系统</h1>
   <p>基于电子邮件的远程控制工具</p>
   
   ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
   ![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)
   ![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat&logo=windows&logoColor=white)
-  ![License](https://img.shields.io/badge/License-AFN-blue.svg)
 </div>
 
 ## 项目概述
