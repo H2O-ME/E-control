@@ -145,6 +145,7 @@ pyinstaller -F -w  email_controller.py
 ```
 在dist目录下可以找到生成的email_controller.exe，双击运行。
 ## 使用
+命令速查表网站https://copypy.netlify.app/
 ### 命令格式
 设备定向命令（需指定设备名）
 ```email
