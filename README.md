@@ -115,13 +115,21 @@ pip install psutil pillow
 ### 电子邮件通信配置
 系统实现双协议通信层，使用 POP3 进行命令接收，SMTP 进行结果传输。
 * `EMAIL_ACCOUNT`：用于受控设备的电子邮件地址
+![Python](https://img.shields.io/badge/email__controller.py%3A32-blue)
 * `EMAIL_PASSWORD`：受控设备的电子邮件的SMTP/POP3 授权码
+![Python](https://img.shields.io/badge/email__controller.py%3A33-blue)
 * `RESULT_EMAIL`：控制端电子邮件地址
+![Python](https://img.shields.io/badge/email__controller.py%3A45-blue)
 * `POP3_SERVER`：受控端邮箱POP3服务器地址（例如，“pop.yeah.net”）
+![Python](https://img.shields.io/badge/email__controller.py%3A34-blue)
 * `POP3_PORT`：POP3 服务端口（通常为 110）
+![Python](https://img.shields.io/badge/email__controller.py%3A35-blue)
 * `SMTP_SERVER`：受控端邮件SMTP服务器主机名（例如，“smtp.yeah.net”）
+![Python](https://img.shields.io/badge/email__controller.py%3A43-blue)
 * `SMTP_PORT`：SMTP 服务端口（通常为 25 ）
+![Python](https://img.shields.io/badge/email__controller.py%3A44-blue)
 * `CHECK_INTERVAL`：电子邮件轮询间隔（默认为300秒）
+![Python](https://img.shields.io/badge/email__controller.py%3A36-blue)
   <img width="815" height="806" alt="image" src="https://github.com/user-attachments/assets/87fddf60-9cba-431f-95c0-a6b83a71de8a" />
 
 ### 运行程序
