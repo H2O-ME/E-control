@@ -6,6 +6,8 @@
   ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
   ![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)
   ![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat&logo=windows&logoColor=white)
+  ![License](https://img.shields.io/badge/License-AFN-blue.svg)
+  [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/H2O-ME/qsgz)
 </div>
 
 ## 系统概述
@@ -88,8 +90,7 @@ graph TD
 ### 核心模块架构
 本系统分为四个主要功能模块，每个模块负责远程控制作的特定方面。
 <img width="1614" height="802" alt="image" src="https://github.com/user-attachments/assets/9093501e-7d11-4a10-8b7e-862d0f3f2976" />
-### 通信协议和数据流
-本系统实现了一种基于电子邮件的异步通信协议，该协议支持目标设备命令和广播命令。
+
 ### 命令格式结构
 <img width="1531" height="811" alt="image" src="https://github.com/user-attachments/assets/61eeb938-9580-4238-84d3-b6ffd2b3265c" />
 
@@ -100,6 +101,9 @@ graph TD
 设备命令过滤机制允许在多设备情况下将命令发送到特定设备。
 <img width="1416" height="614" alt="image" src="https://github.com/user-attachments/assets/21373456-db00-45be-9fe1-4b63946c0792" />
 
+### 错误处理流程
+<img width="1105" height="811" alt="image" src="https://github.com/user-attachments/assets/23514e3d-8f5e-4939-9cc7-d81ed79e57ba" />
+
 
 ## 部署
 ### Python环境要求
@@ -109,6 +113,7 @@ graph TD
 pip install psutil pillow
 ```
 ### 电子邮件通信配置
+系统实现双协议通信层，使用 POP3 进行命令接收，SMTP 进行结果传输。
 * `EMAIL_ACCOUNT`：用于受控设备的电子邮件地址
 * `EMAIL_PASSWORD`：受控设备的电子邮件的SMTP/POP3 授权码
 * `RESULT_EMAIL`：控制端电子邮件地址
@@ -116,7 +121,9 @@ pip install psutil pillow
 * `POP3_PORT`：POP3 服务端口（通常为 110）
 * `SMTP_SERVER`：受控端邮件SMTP服务器主机名（例如，“smtp.yeah.net”）
 * `SMTP_PORT`：SMTP 服务端口（通常为 25 ）
-  <img width="1686" height="390" alt="image" src="https://github.com/user-attachments/assets/4e92dd44-5bf6-4202-ae2c-29b74365f180" />
+* `CHECK_INTERVAL`：电子邮件轮询间隔（默认为300秒）
+  <img width="815" height="806" alt="image" src="https://github.com/user-attachments/assets/87fddf60-9cba-431f-95c0-a6b83a71de8a" />
+
 ### 运行程序
 #### 1.通过python运行
 导航到包含Python文件的目录，然后按住Shift键并右键单击空白处，选择“在此处打开PowerShell窗口”。在PowerShell窗口中，输入以下命令：
@@ -145,7 +152,7 @@ to+设备名+b- 快捷指令：播放《Never Gonna Give You Up》
 to+设备名+screen- 发送当前屏幕截屏
 to+设备名+remove- 启动自毁程序
 ```
-广播命令（无需指定设备名）
+广播命令（无需指定设备名，单设备情况下将更加简单）
 ```email
 cmd+命令- 执行系统命令
 website+网址- 访问网站
@@ -159,10 +166,31 @@ b- 快捷指令：播放《Never Gonna Give You Up》
 screen- 发送当前屏幕截屏
 remove- 启动自毁程序
 ```
+### 网站命令（website+）示例使用
+
+网站命令使用具有自动协议处理功能的模块在默认浏览器中打开 URL。`webbrowser`
+通过RESULT_EMAIL向EMAIL_ACCOUNT发送邮件，主题设置为空，正文内容如下
+| 命令格式 | 描述 | 例 |
+| --- | --- | --- |
+| `website+<url>` | 打开网站（广播） | `website+example.com` |
+| `to+<device>+website+<url>` | 打开网站（有针对性） | `to+DESKTOP-ABC+website+example.com` |
 ### 注意事项
 * 设备名中不能包含符号+
 * 命令须区分大小写
 * 不支持命令嵌套
 * 需要管理员权限的命令会自动触发UAC弹窗
-* 因邮件附件限制，发送文件单个文件大小限制：20MB，超出限制将放弃执行
+* 因邮件附件限制，发送文件单个文件大小限制：20MB，不同的邮箱服务商附件大小限制不同，可根据您的情况调整.这个20MB的限制是硬编码在源代码中的。如果需要发送更大的文件，需要修改源代码中的以下数值。
+```python
+if os.path.getsize(file_path) > 20 * 1024 * 1024:  # 20MB限制
+```
 * 使用POP3与SMTP认证须注意授权码有效期
+* ⚠CHECK_INTERVAL不能过小，轮询间隔过小可能会被提示“系统流量限制”风控
+## 📄 协议
+
+本项目使用 [AFN-License 2.0](LICENSE) 授权。
+
+---
+
+<div align="center">
+    <p>© 2025 THW 版权所有</p>
+</div>
