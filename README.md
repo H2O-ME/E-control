@@ -97,10 +97,11 @@ graph TD
 <img width="1242" height="804" alt="image" src="https://github.com/user-attachments/assets/da953939-54ea-4856-9cd0-b2245ccbff18" />
 
 ### 设备命令过滤
-设备过滤机制将确保命令仅在预期目标上执行。
-<img width="1699" height="324" alt="image" src="https://github.com/user-attachments/assets/bdb95b7a-03d1-4383-adb3-6a5bdc3aaeda" />
+设备命令过滤机制允许在多设备情况下将命令发送到特定设备。
+<img width="1416" height="614" alt="image" src="https://github.com/user-attachments/assets/21373456-db00-45be-9fe1-4b63946c0792" />
 
-## 部署与使用
+
+## 部署
 ### Python环境要求
 该系统需要 Python 3.6+ 。
 ### 安装所需库
@@ -128,3 +129,40 @@ python email_controller.py
 pyinstaller -F -w  email_controller.py
 ```
 在dist目录下可以找到生成的email_controller.exe，双击运行。
+## 使用
+### 命令格式
+设备定向命令（需指定设备名）
+```email
+to+设备名+cmd+命令- 执行系统命令
+to+设备名+website+网址- 访问网站（无需加 https://）
+to+设备名+poweroff- 关闭程序运行
+to+设备名+file+list- 列出桌面文件
+to+设备名+file+文件名- 发送桌面文件
+to+设备名+file+文件夹名- 列出文件夹内容
+to+设备名+file+文件夹名+文件名- 发送文件夹中的文件
+to+设备名+a- 快捷指令：显示错误弹窗
+to+设备名+b- 快捷指令：播放《Never Gonna Give You Up》
+to+设备名+screen- 发送当前屏幕截屏
+to+设备名+remove- 启动自毁程序
+```
+广播命令（无需指定设备名）
+```email
+cmd+命令- 执行系统命令
+website+网址- 访问网站
+poweroff- 关闭程序运行
+file+list- 列出桌面文件
+file+文件名- 发送桌面文件
+file+文件夹名- 列出文件夹内容
+file+文件夹名+文件名- 发送文件夹中的文件
+a- 快捷指令：显示错误弹窗
+b- 快捷指令：播放《Never Gonna Give You Up》
+screen- 发送当前屏幕截屏
+remove- 启动自毁程序
+```
+### 注意事项
+* 设备名中不能包含符号+
+* 命令须区分大小写
+* 不支持命令嵌套
+* 需要管理员权限的命令会自动触发UAC弹窗
+* 因邮件附件限制，发送文件单个文件大小限制：20MB，超出限制将放弃执行
+* 使用POP3与SMTP认证须注意授权码有效期
