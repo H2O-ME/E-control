@@ -185,7 +185,7 @@ if os.path.getsize(file_path) > 20 * 1024 * 1024:  # 20MB限制
 ```
 * 使用POP3与SMTP认证须注意授权码有效期
 * ⚠CHECK_INTERVAL不能过小，轮询间隔过小可能会被提示“系统流量限制”风控
-## 📄 协议
+## 📄 许可证
 
 本项目使用 [AFN-License 2.0](LICENSE) 授权。
 
