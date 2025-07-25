@@ -90,10 +90,12 @@ graph TD
 <img width="1614" height="802" alt="image" src="https://github.com/user-attachments/assets/9093501e-7d11-4a10-8b7e-862d0f3f2976" />
 ### 通信协议和数据流
 本系统实现了一种基于电子邮件的异步通信协议，该协议支持目标设备命令和广播命令。
+### 命令格式结构
+<img width="1531" height="811" alt="image" src="https://github.com/user-attachments/assets/61eeb938-9580-4238-84d3-b6ffd2b3265c" />
 
-### 命令处理
-设置了一个完善的命令处理流程来处理解析、验证、调度和执行。
-<img width="962" height="896" alt="image" src="https://github.com/user-attachments/assets/21bb724a-2476-4f40-98e2-6119f84b3724" />
+### 命令类别和处理
+<img width="1242" height="804" alt="image" src="https://github.com/user-attachments/assets/da953939-54ea-4856-9cd0-b2245ccbff18" />
+
 ### 设备命令过滤
 设备过滤机制将确保命令仅在预期目标上执行。
 <img width="1699" height="324" alt="image" src="https://github.com/user-attachments/assets/bdb95b7a-03d1-4383-adb3-6a5bdc3aaeda" />
@@ -114,4 +116,15 @@ pip install psutil pillow
 * `SMTP_SERVER`：受控端邮件SMTP服务器主机名（例如，“smtp.yeah.net”）
 * `SMTP_PORT`：SMTP 服务端口（通常为 25 ）
   <img width="1686" height="390" alt="image" src="https://github.com/user-attachments/assets/4e92dd44-5bf6-4202-ae2c-29b74365f180" />
-
+### 运行程序
+#### 1.通过python运行
+导航到包含Python文件的目录，然后按住Shift键并右键单击空白处，选择“在此处打开PowerShell窗口”。在PowerShell窗口中，输入以下命令：
+```powershell
+python email_controller.py
+```
+#### 2.使用PyInstaller打包成exe文件运行
+导航到包含Python文件的目录，然后按住Shift键并右键单击空白处，选择“在此处打开PowerShell窗口”。在PowerShell窗口中，输入以下命令：
+```powershell
+pyinstaller -F -w  email_controller.py
+```
+在dist目录下可以找到生成的email_controller.exe，双击运行。
