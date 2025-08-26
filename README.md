@@ -6,7 +6,6 @@
   ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
   ![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)
   ![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat&logo=windows&logoColor=white)
-  ![License](https://img.shields.io/badge/License-AFN-blue.svg)
   [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/H2O-ME/qsgz)
 </div>
 
@@ -195,7 +194,7 @@ if os.path.getsize(file_path) > 20 * 1024 * 1024:  # 20MB限制
 * ⚠CHECK_INTERVAL不能过小，轮询间隔过小可能会被提示“系统流量限制”风控
 ## 📄 许可证
 
-本项目使用 [AFN-License 2.0](LICENSE) 授权。
+本项目使用 [MIT](LICENSE) 授权。
 
 ---
 
